@@ -15,7 +15,7 @@ UPLOAD_FOLDER = "/static/uploads"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///receiptBase.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MCPBase.db'
 
 db = SQLAlchemy(app)
 
@@ -24,6 +24,13 @@ db = SQLAlchemy(app)
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+class MCP(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime, nullable=False)
+    time_hour = db.Column(db.Integer, nullable=False)
+    total_cost = db.Column(db.Float, nullable=False)
 
 class Receipt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
