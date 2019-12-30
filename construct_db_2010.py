@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
 from datetime import time
+from datetime import date
 
 import os
 import csv
@@ -16,7 +17,7 @@ db = SQLAlchemy(app)
 
 class MCP(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     time_hour = db.Column(db.Integer, nullable=False)
     price_tl = db.Column(db.Float, nullable=False)
     price_usd = db.Column(db.Float, nullable=False)
@@ -24,7 +25,7 @@ class MCP(db.Model):
 
 db.create_all()
 
-with open('PTF-31122019.csv') as csv_file:
+with open('PTF-01012010-31122019.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
@@ -32,17 +33,25 @@ with open('PTF-31122019.csv') as csv_file:
             print(''.join(row))
             line_count += 1
         else:
-            date = row[0]
-            hour = row[1]
-            print(row[3])
-            print(row[2])
-            price_tl = float(row[2])
-            price_usd = float(row[3])
-            price_eur = float(row[4])
+            date_un_formatted = row[0].replace(' ', '')
 
-            date_formatted = 2
+            day = int(date_un_formatted[:2])
+            month = int(date_un_formatted[3:-5])
+            year = int(date_un_formatted[6:])
 
-            new_mcp = MCP(date_created = datetime.now(), time_hour = hour[:2], price_tl=price_tl, price_usd=price_usd, price_eur=price_eur)
+            date_to_add = date(year=year, month=month, day=day)
+
+            hour = row[1].replace(' ', '')
+            
+            price_tl_temp = row[2].replace('.', '')
+            price_usd_temp = row[3].replace('.', '')
+            price_eur_temp = row[4].replace('.', '')
+
+            price_tl = float(price_tl_temp.replace(',', '.'))
+            price_usd = float(price_usd_temp.replace(',', '.'))
+            price_eur = float(price_eur_temp.replace(',', '.'))
+
+            new_mcp = MCP(date=date_to_add, time_hour=hour[:2], price_tl=price_tl, price_usd=price_usd, price_eur=price_eur)
 
             db.session.add(new_mcp)
             db.session.commit()
