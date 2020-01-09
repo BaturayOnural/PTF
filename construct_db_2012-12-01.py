@@ -11,21 +11,18 @@ import os
 import csv
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MCPBase.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MCPBase_TL.db'
 
 db = SQLAlchemy(app)
 
 class MCP(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, nullable=False)
-    time_hour = db.Column(db.Integer, nullable=False)
-    price_tl = db.Column(db.Float, nullable=False)
-    price_usd = db.Column(db.Float, nullable=False)
-    price_eur = db.Column(db.Float, nullable=False)
+    symbol = db.Column(db.String, nullable=False, primary_key=True)
+    date = db.Column(db.DateTime, nullable=False, primary_key=True)
+    price=db.Column(db.Float, nullable=False, primary_key=True)
 
 db.create_all()
 
-with open('PTF-01012010-31122019.csv') as csv_file:
+with open('PTF-01012010-04012020.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
@@ -38,11 +35,12 @@ with open('PTF-01012010-31122019.csv') as csv_file:
             day = int(date_un_formatted[:2])
             month = int(date_un_formatted[3:-5])
             year = int(date_un_formatted[6:])
-
-            date_to_add = date(year=year, month=month, day=day)
-
+          
             hour = row[1].replace(' ', '')
-            
+
+            # datetime(year, month, day, hour, minute, second, microsecond)
+            date_formatted = datetime(year, month, day, int(hour[:2]), 00, 00, 00000)
+
             price_tl_temp = row[2].replace('.', '')
             price_usd_temp = row[3].replace('.', '')
             price_eur_temp = row[4].replace('.', '')
@@ -51,9 +49,13 @@ with open('PTF-01012010-31122019.csv') as csv_file:
             price_usd = float(price_usd_temp.replace(',', '.'))
             price_eur = float(price_eur_temp.replace(',', '.'))
 
-            new_mcp = MCP(date=date_to_add, time_hour=hour[:2], price_tl=price_tl, price_usd=price_usd, price_eur=price_eur)
+            new_mcp_tl = MCP(symbol="TL/MWh", date=date_formatted, price=price_tl)
+            #new_mcp_usd = MCP(symbol="USD/MWh", date=date_formatted, price=price_usd)
+            #new_mcp_eur = MCP(symbol="EUR/MWh", date=date_formatted, price=price_eur)
 
-            db.session.add(new_mcp)
+            db.session.add(new_mcp_tl)
+            #db.session.add(new_mcp_usd)
+            #db.session.add(new_mcp_eur)
             db.session.commit()
 
             line_count += 1

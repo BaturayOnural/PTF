@@ -42,3 +42,31 @@ JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.reso
 JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.resource/js/layout.js.xhtml?ln=adamantium-layout, line 241: unreachable code after return statement
 JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.resource/js/layout.js.xhtml?ln=adamantium-layout, line 241: unreachable code after return statement
 1578054459269	Marionette	INFO	Stopped listening on port 46865
+1578062576359	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileime7Yy"
+1578062577491	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1578062577491	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1578062577491	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1578062577491	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1578062581426	Marionette	INFO	Listening on port 36775
+1578062581478	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.resource/js/layout.js.xhtml?ln=adamantium-layout, line 241: unreachable code after return statement
+JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.resource/js/layout.js.xhtml?ln=adamantium-layout, line 241: unreachable code after return statement
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+Exiting due to channel error.
+1578062599368	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile7pX5W2"
+*** You are running in headless mode.
+1578062599862	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1578062599862	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1578062599862	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1578062599862	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1578062602208	Marionette	INFO	Listening on port 33383
+1578062602278	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.resource/js/layout.js.xhtml?ln=adamantium-layout, line 241: unreachable code after return statement
+JavaScript warning: https://seffaflik.epias.com.tr/transparency/javax.faces.resource/js/layout.js.xhtml?ln=adamantium-layout, line 241: unreachable code after return statement
+
+(firefox:25567): GLib-GObject-CRITICAL **: g_object_get: assertion 'G_IS_OBJECT (object)' failed
+JavaScript error: resource:///modules/BrowserUsageTelemetry.jsm, line 304: TypeError: this._timeouts.remove is not a function

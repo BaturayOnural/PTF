@@ -30,10 +30,12 @@ before = os.listdir(download_dir)
 fp = webdriver.FirefoxProfile()
 options = Options()
 
+options.headless = True
+
 fp.set_preference("browser.download.folderList", 2)
-#fp.set_preference("browser.download.manager.showWhenStarting", False)
+fp.set_preference("browser.download.manager.showWhenStarting", False)
 fp.set_preference("browser.download.dir", download_dir)
-#fp.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
+fp.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
 
 driver = webdriver.Firefox(options=options, firefox_profile=fp, executable_path='./geckodriver')
 print('Opened browser.')
